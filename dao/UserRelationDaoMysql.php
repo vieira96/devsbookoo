@@ -24,15 +24,12 @@ class UserRelationDaoMysql implements UserRelationDAO {
         $sql->bindValue(":user_from", $id);
         $sql->execute();
 
-       
-
         if($sql->rowCount() > 0) {
             $data = $sql->fetchAll();
             foreach($data as $item) {
-                $users[] = [$item['user_to']];
+                $users[] = $item['user_to'];
             }
         }
-
         return $users;
     }
 }

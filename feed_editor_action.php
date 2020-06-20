@@ -13,7 +13,7 @@ if($body) {
     $postDao = new PostDaoMysql($pdo);
 
     $newPost = new Post();
-    $newPost->user_id = $userInfo->id;
+    $newPost->id_user = $userInfo->id;
     $newPost->type = 'text';
     $newPost->created_at = date("Y-m-d H:i:s");
     $newPost->body = $body;

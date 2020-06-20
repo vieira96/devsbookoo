@@ -5,7 +5,7 @@ require_once 'dao/PostDaoMysql.php';
 class Post {
 
     public $id;
-    public $user_id;
+    public $id_user;
     public $created_at;
     public $type;
     public $body;
@@ -13,4 +13,5 @@ class Post {
 
 interface PostDAO {
     public function insert(Post $p);
+    public function getHomeFeed($id_user);
 } 
