@@ -42,8 +42,7 @@ class PostDaoMysql implements PostDAO {
         if($sql->rowCount() > 0) {
             $data = $sql->fetchAll(PDO::FETCH_ASSOC);
             
-            $array = $this->_postListToObject($data, $id_user);
-            
+            $array = $this->_postListToObject($data, $id_user);   
         }
         
         
