@@ -19,7 +19,36 @@
                     ?>
                 </span>
                 <br/>
-                <span class="fidi-date"><?=date('d/m/Y', strtotime($feed_item->created_at))?></span>
+                <span class="fidi-date">
+                    <?php
+                        $hourFrom = new DateTime($feed_item->created_at);
+                        $hourTo = new DateTime('now');
+                        $diff = date_diff($hourTo, $hourFrom);
+                        switch($diff){
+
+                            case $diff->d > 2:
+                                echo date('d/m/Y', strtotime($feed_item->created_at));
+                                echo " às " . date('H:i');
+                                break;
+                            case $diff->d >= 1:
+                                echo $diff->d . " d";
+                                break;
+                            case $diff->h > 1:
+                                echo $diff->h . " hrs";
+                                break;
+                            case $diff->h == 1:
+                                echo $diff->h . " hr";
+                                break;
+                            case $diff->i >= 1:
+                                echo $diff->i . " min";
+                                break;
+                            default:
+                                echo $diff->s . " sec";
+                                break;
+                            break;
+                        }
+                    ?>
+                </span>
             </div>
             <div class="feed-item-head-btn">
                 <img src="<?=$base?>/assets/images/more.png" />
