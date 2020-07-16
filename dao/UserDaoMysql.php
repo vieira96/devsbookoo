@@ -1,6 +1,7 @@
 <?php
 
 require_once 'models/User.php';
+require_once 'dao/UserRelationDaoMysql.php';
 
 class UserDaoMysql implements UserDAO {
 
@@ -11,7 +12,7 @@ class UserDaoMysql implements UserDAO {
         $this->pdo = $driver;
     }
 
-    private function generateUser($array) {
+    private function generateUser($array, $full = false) {
         $u = new User();
 
         $u->id = $array['id'] ?? '';
@@ -24,6 +25,28 @@ class UserDaoMysql implements UserDAO {
         $u->city = $array['city'] ?? '';
         $u->work = $array['work'] ?? '';
         $u->birthdate = $array['birthdate'] ?? '';
+
+        if($full) {
+            $urDaoMysql = new UserRelationDaoMysql($this->pdo);
+
+            // followers = quem segue o usuarios
+            $u->followers = $urDaoMysql->getFollowers($u->id);
+            foreach($u->followers as $key => $followerId) {
+                $newUser = $this->findById($followerId);
+                $u->followers[$key] = $newUser;
+            }
+
+            // following = quem o usuário segue
+            $u->following = $urDaoMysql->getFollowing($u->id);
+            foreach($u->following as $key => $followingId) {
+                $newUser = $this->findById($followingId);
+                $u->following[$key] = $newUser;
+            }
+
+            // fotos
+
+            $u->photos = [];
+        }
 
         return $u;
     }
@@ -64,7 +87,7 @@ class UserDaoMysql implements UserDAO {
         return false;
     }
     
-    public function findById($id)
+    public function findById($id, $full = false)
     {
         if(!empty($id)){
             $sql = $this->pdo->prepare("SELECT * FROM users WHERE id = :id");
@@ -73,11 +96,13 @@ class UserDaoMysql implements UserDAO {
 
             if($sql->rowCount() > 0) {
                 $data = $sql->fetch(PDO::FETCH_ASSOC);
-                $user = $this->generateUser($data);
+                $user = $this->generateUser($data, $full);
 
                 return $user;
             }
+            
         }
+
 
         return false;
     }

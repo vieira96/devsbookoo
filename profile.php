@@ -24,7 +24,7 @@ $userDao = new UserDaoMysql($pdo);
 
 //Pegar informações do usuario
 
-$user = $userDao->findById($id);
+$user = $userDao->findById($id, true);
 if(!$user) { 
     header("Location: ".$base);
     exit;
@@ -57,15 +57,15 @@ require 'partials/menu.php';
                 </div>
                 <div class="profile-info-data row">
                     <div class="profile-info-item m-width-20">
-                        <div class="profile-info-item-n">-1</div>
+                        <div class="profile-info-item-n"><?=count($user->followers)?></div>
                         <div class="profile-info-item-s">Seguidores</div>
                     </div>
                     <div class="profile-info-item m-width-20">
-                        <div class="profile-info-item-n">-1</div>
+                        <div class="profile-info-item-n"><?=count($user->following);?></div>
                         <div class="profile-info-item-s">Seguindo</div>
                     </div>
                     <div class="profile-info-item m-width-20">
-                        <div class="profile-info-item-n">-1</div>
+                        <div class="profile-info-item-n"><?=count($user->photos);?></div>
                         <div class="profile-info-item-s">Fotos</div>
                     </div>
                 </div>
@@ -106,24 +106,28 @@ require 'partials/menu.php';
             <div class="box-header m-10">
                 <div class="box-header-text">
                     Seguindo
-                    <span>(-1)</span>
+                    <span>(<?=count($user->following)?>)</span>
                 </div>
                 <div class="box-header-buttons">
-                    <a href="">ver todos</a>
+                    <a href="<?=$base;?>/friends.php?id=<?=$user->id;?>">ver todos</a>
                 </div>
             </div>
             <div class="box-body friend-list">
+                <?php if(count($user->following) > 0): ?>
+                    <?php foreach($user->following as $friend): ?>
+                        <div class="friend-icon">
+                            <a href="<?=$base;?>/profile.php?id=<?=$friend->id;?>">
+                                <div class="friend-icon-avatar">
+                                    <img src="<?=$base;?>/media/avatars/<?=$friend->avatar;?>" />
+                                </div>
+                                <div class="friend-icon-name">
+                                    <?=$friend->name;?>
+                                </div>
+                            </a>
+                        </div>
+                    <?php endforeach; ?>
+                <?php endif; ?>
                 
-                <div class="friend-icon">
-                    <a href="">
-                        <div class="friend-icon-avatar">
-                            <img src="media/avatars/avatar.jpg" />
-                        </div>
-                        <div class="friend-icon-name">
-                            Bonieky
-                        </div>
-                    </a>
-                </div>
 
             </div>
         </div>
@@ -135,10 +139,10 @@ require 'partials/menu.php';
             <div class="box-header m-10">
                 <div class="box-header-text">
                     Fotos
-                    <span>(-1)</span>
+                    <span>(<?=count($user->photos);?>)</span>
                 </div>
                 <div class="box-header-buttons">
-                    <a href="">ver todos</a>
+                    <a href="<?=$base?>/photos.php?id=<?=$user->id;?>">ver todos</a>
                 </div>
             </div>
             <div class="box-body row m-20">

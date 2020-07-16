@@ -32,8 +32,8 @@ class PostDaoMysql implements PostDAO {
         $array = [];
         // 1. Lista dos usuários que Eu sigo. 
         $urDao = new UserRelationDaoMysql($this->pdo);
-        $userList = $urDao->getRelationsFrom($id_user);
-        
+        $userList = $urDao->getFollowing($id_user);
+        $userList[] = $id_user;        
         
         // 2. Pegar os posts ordenando pela data.
 
