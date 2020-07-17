@@ -16,7 +16,7 @@ class UserRelationDaoMysql implements UserRelationDAO {
         
     }
 
-    public function getFollowing($id)
+    public function getfollowings($id)
     {
         $users = [];
         
