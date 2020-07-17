@@ -62,17 +62,8 @@ require 'partials/menu.php';
                             
                             <div class="full-friend-list">
 
-                                <?php foreach($user->followers as $follower): ?>
-                                    <div class="friend-icon">
-                                        <a href="<?=$base;?>/profile.php?id=<?=$follower->id;?>">
-                                            <div class="friend-icon-avatar">
-                                                <img src="<?=$base;?>/media/avatars/<?=$follower->avatar;?>" />
-                                            </div>
-                                            <div class="friend-icon-name">
-                                                <?= $follower->name; ?>
-                                            </div>
-                                        </a>
-                                    </div>
+                                <?php foreach($user->followers as $item): ?>
+                                    <?php require 'partials/user-item.php'; ?>
                                 <?php endforeach; ?>
 
                             </div>
@@ -83,17 +74,8 @@ require 'partials/menu.php';
                             
                             <div class="full-friend-list">
 
-                                <?php foreach($user->followings as $following): ?>
-                                    <div class="friend-icon">
-                                        <a href="<?=$base;?>/profile.php?id=<?=$following->id;?>">
-                                            <div class="friend-icon-avatar">
-                                                <img src="<?=$base;?>/media/avatars/<?=$following->avatar;?>" />
-                                            </div>
-                                            <div class="friend-icon-name">
-                                                <?= $following->name; ?>
-                                            </div>
-                                        </a>
-                                    </div>
+                                <?php foreach($user->followings as $item): ?>
+                                    <?php require 'partials/user-item.php'; ?>
                                 <?php endforeach; ?>
 
                             </div>

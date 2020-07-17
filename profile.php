@@ -89,17 +89,8 @@ require 'partials/menu.php';
             </div>
             <div class="box-body friend-list">
                 <?php if(count($user->followings) > 0): ?>
-                    <?php foreach($user->followings as $friend): ?>
-                        <div class="friend-icon">
-                            <a href="<?=$base;?>/profile.php?id=<?=$friend->id;?>">
-                                <div class="friend-icon-avatar">
-                                    <img src="<?=$base;?>/media/avatars/<?=$friend->avatar;?>" />
-                                </div>
-                                <div class="friend-icon-name">
-                                    <?=$friend->name;?>
-                                </div>
-                            </a>
-                        </div>
+                    <?php foreach($user->followings as $item): ?>
+                        <?php require 'partials/user-item.php'; ?>
                     <?php endforeach; ?>
                 <?php endif; ?>
                 

@@ -88,6 +88,27 @@ class UserDaoMysql implements UserDAO {
 
         return false;
     }
+
+    public function findByName($name) 
+    {
+        $array = [];
+
+        if(!empty($name)){
+            $sql = $this->pdo->prepare("SELECT id, name, avatar FROM users WHERE name LIKE :name");
+            $sql->bindValue(":name", "%".$name."%");
+            $sql->execute();
+
+            if($sql->rowCount() > 0) {
+                
+                $data = $sql->fetchAll(PDO::FETCH_ASSOC);
+                foreach($data as $user) {
+                    $array[] = $this->generateUser($user);
+                }
+            }
+        }
+
+        return $array;
+    }
     
     public function findById($id, $full = false)
     {
