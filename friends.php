@@ -30,10 +30,6 @@ if(!$user) {
     exit;
 }
 
-$dateFrom = new DateTime($user->birthdate);
-$dateTo = new DateTime('today');
-$user->ageYears = $dateFrom->diff($dateTo)->y; // pega a diferença entre os anos para calcular a idade
-
 //verificar se sigo esse usuario
 
 
