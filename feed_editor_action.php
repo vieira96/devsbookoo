@@ -1,7 +1,7 @@
 <?php
-require 'config.php';
-require 'models/Auth.php';
-require 'models/Post.php';
+require_once 'config.php';
+require_once 'models/Auth.php';
+require_once 'models/Post.php';
 
 $auth = new Auth($pdo, $base);
 $userInfo = $auth->checkToken();

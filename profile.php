@@ -140,7 +140,11 @@ require 'partials/menu.php';
                 <?php require 'partials/feed-item.php'; ?>
             <?php endforeach; ?>
         <?php else: ?>
-                Não há postagens deste usuário.
+                <?php if($id == $userInfo->id): ?>
+                    Você não postou nada ainda.
+                <?php else: ?>
+                    Não há postagens deste usuário.
+                <?php endif; ?>
         <?php endif; ?>
 
     </div>

@@ -1,6 +1,6 @@
 <?php
-require 'config.php';
-require 'models/Auth.php';
+require_once 'config.php';
+require_once 'models/Auth.php';
 
 $name = filter_input(INPUT_POST, 'name');
 $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
@@ -17,6 +17,12 @@ if($name && $email && $password && $birthdate) {
         header("Location: ".$base."/signup.php");
         exit;
     }  
+
+    if(strlen($birthdate[2]) < 4) {
+        $_SESSION['flash'] = "Data de nascimento inválida";
+        header("Location: ".$base."/settings.php");
+        exit;
+    }
 
     $birthdate = $birthdate[2] . "-" . $birthdate[1] . "-" . $birthdate[0];
     if(!strtotime($birthdate)) {
