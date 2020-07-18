@@ -1,11 +1,13 @@
-<div class="box feed-item">
+<?php require_once 'partials/feed-item-script.php'; ?>
+
+<div class="box feed-item" data-id="<?=$feed_item->id?>">
     <div class="box-body">
         <div class="feed-item-head row mt-20 m-width-20">
             <div class="feed-item-head-photo">
-                <a href=""><img src="<?=$base;?>/media/avatars/<?=$feed_item->user->avatar;?>" /></a>
+                <a href="<?=$base?>/profile.php?id=<?=$feed_item->user->id;?>"><img src="<?=$base;?>/media/avatars/<?=$feed_item->user->avatar;?>" /></a>
             </div>
             <div class="feed-item-head-info">
-                <a href=""><span class="fidi-name"><?=$feed_item->user->name;?></span></a>
+                <a href="<?=$base?>/profile.php?id=<?=$feed_item->user->id;?>"><span class="fidi-name"><?=$feed_item->user->name;?></span></a>
                 <span class="fidi-action">
                     <?php
                         switch($feed_item->type){
