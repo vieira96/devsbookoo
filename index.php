@@ -10,7 +10,7 @@ $activeMenu = "home";
 
 $postDao = new PostDaoMysql($pdo);
 $feed = $postDao->getHomeFeed($userInfo->id);
-
+$postLikeDao = new PostLikeDaoMysql($pdo);
 
 require 'partials/header.php';
 require 'partials/menu.php'; 

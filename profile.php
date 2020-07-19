@@ -5,6 +5,7 @@ require_once 'models/Auth.php';
 require_once 'dao/PostDaoMysql.php';
 require_once 'dao/UserDaoMysql.php';
 require_once 'dao/UserRelationDaoMysql.php';
+require_once 'dao/PostLikeDaoMysql.php';
 
 $activeMenu = '';
 $auth = new Auth($pdo, $base);
@@ -23,6 +24,7 @@ if($id == $userInfo->id) {
 }
 
 $postDao = new PostDaoMysql($pdo);
+$postLikeDao = new PostLikeDaoMysql($pdo);
 $userDao = new UserDaoMysql($pdo);
 
 
