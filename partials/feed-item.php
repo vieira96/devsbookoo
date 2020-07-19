@@ -61,17 +61,32 @@
         </div>
         <div class="feed-item-buttons row mt-20 m-width-20">
             <div class="like-btn <?= $postLikeDao->isLiked($feed_item->id, $userInfo->id) ?'on':''?>"><?=$feed_item->likeCount?></div>
-            <div class="msg-btn"><?=count($feed_item->comments)?></div>
+            <div class="msg-btn" ><?=count($feed_item->comments)?></div>
         </div>
+
         <div class="feed-item-comments">
         
+            <div class="feed-item-comments-area">
+                <?php foreach($feed_item->comments as $comment): ?>
+                    <div class="fic-item row m-height-10 m-width-20">
+                        <div class="fic-item-photo">
+                            <a href="<?=$base;?>/profile.php?id=<?=$comment->user->id;?>"><img src="<?=$base?>/media/avatars/<?=$comment->user->avatar;?>" /></a>
+                        </div>
+                        <div class="fic-item-info">
+                            <a href="<?=$base;?>/profile.php?id=<?=$comment->user->id;?>"><?=$comment->user->name;?></a>
+                            <?=$comment->body?>
+                        </div>
+                    </div>
+                <?php endforeach; ?> 
+            </div>
+            
             <div class="fic-answer row m-height-10 m-width-20">
                 <div class="fic-item-photo">
                     <img src="<?=$base?>/media/avatars/<?=$userInfo->avatar;?>" />
                 </div>
                 <input type="text" class="fic-item-field" placeholder="Escreva um comentário" />
             </div>
-
+            
         </div>
     </div>
 </div>
