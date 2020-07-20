@@ -61,7 +61,7 @@
         </div>
         <div class="feed-item-buttons row mt-20 m-width-20">
             <div class="like-btn <?= $postLikeDao->isLiked($feed_item->id, $userInfo->id) ?'on':''?>"><?=$feed_item->likeCount?></div>
-            <div class="msg-btn" ><?=count($feed_item->comments)?></div>
+            <div class="msg-btn" ><script>tentar();</script></div>
         </div>
 
         <div class="feed-item-comments">

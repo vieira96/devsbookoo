@@ -8,7 +8,7 @@ require_once 'dao/UserDaoMysql.php';
 $auth = new Auth($pdo, $base);
 $userInfo = $auth->checkToken();
 
-$id = filter_input(INPUT_GET, 'id');
+$id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
 
 
 if($id) {

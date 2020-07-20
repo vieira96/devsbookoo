@@ -3,7 +3,7 @@ require_once 'config.php';
 require_once 'models/Auth.php';
 
 $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
-$password = filter_input(INPUT_POST, 'password');
+$password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRIPPED);
 
 if($email && $password) {
     //$pdo e $base vem do config

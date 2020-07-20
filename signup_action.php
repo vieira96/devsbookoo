@@ -2,9 +2,9 @@
 require_once 'config.php';
 require_once 'models/Auth.php';
 
-$name = filter_input(INPUT_POST, 'name');
+$name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRIPPED);
 $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
-$password = filter_input(INPUT_POST, 'password');
+$password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRIPPED);
 $birthdate = filter_input(INPUT_POST, 'birthdate');
 
 if($name && $email && $password && $birthdate) {

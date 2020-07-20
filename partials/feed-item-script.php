@@ -44,7 +44,6 @@ window.onload = function() {
                     html += json.body;
                     html += '</div>';
                     html += '</div>';
-
                     item.closest('.feed-item')
                         .querySelector('.feed-item-comments-area')
                         .innerHTML += html;

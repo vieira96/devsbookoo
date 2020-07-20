@@ -6,7 +6,7 @@ require_once 'models/Post.php';
 $auth = new Auth($pdo, $base);
 $userInfo = $auth->checkToken();
 
-$body = filter_input(INPUT_POST, 'body');
+$body = filter_input(INPUT_POST, 'body', FILTER_SANITIZE_STRIPPED);
 
 if($body) {
     //$pdo e $base vem do config
