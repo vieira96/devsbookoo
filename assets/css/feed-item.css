@@ -1,6 +1,4 @@
-.feed-item {
 
-}
 .feed-item-head {
     align-items: center;
 }
@@ -41,9 +39,14 @@
     color:#333;
     line-height: 20px;
     font-size:14px;
+    display: flex;
 }
+
+
 .feed-item-body img {
     max-width:100%;
+    max-height: 500px;
+    display: flex;
 }
 
 .feed-item-buttons {

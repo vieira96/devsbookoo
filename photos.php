@@ -51,9 +51,9 @@ require 'partials/menu.php';
                 <div class="full-user-photos">
 
                     <?php foreach($user->photos as $key => $photo): ?>
-                        <div class="user-photo-item">
-                            <a href="#modal-<?=$key;?>" rel="modal:open">
-                                <img src="<?= $base; ?>/media/uploads/<?=$photo->body;?>" />
+                        <div class="user-photo-item" style="max-width: 100% !important; display: flex; align-items: center;">
+                            <a href="#modal-<?=$key;?>" data-modal-open>
+                                <img style="min-height: 100px; max-height: 200px;" src="<?= $base; ?>/media/uploads/<?=$photo->body;?>" />
                             </a>
                             <div id="modal-<?=$key;?>" style="display:none">
                                 <img src="<?= $base ?>/media/uploads/<?=$photo->body;?>" />
@@ -74,5 +74,11 @@ require 'partials/menu.php';
 </div>
 
 </section>
+
+<script>
+    window.onload = function() {
+        var modal = new VanillaModal.default();
+    };
+</script>
 
 <?php require 'partials/footer.php';?>

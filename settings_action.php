@@ -2,6 +2,11 @@
 require_once 'config.php';
 require_once 'models/Auth.php';
 require_once 'dao/UserDaoMysql.php';
+require_once 'vendor/autoload.php';
+
+use Intervention\Image\ImageManager;
+
+$manager = new ImageManager();
 
 $auth = new Auth($pdo, $base);
 $userInfo = $auth->checkToken();
@@ -62,9 +67,15 @@ if($name) {
             
             $oldProfilePick = $userInfo->avatar;
 
-            $avatarName = md5(time().rand(0,9999)).'.jpg';
+            $avatarName = md5(uniqid(rand(0, 9999))).'.jpg';
+            
+            $img = $manager->make($newAvatar['tmp_name']);
+            $img->resize(200, 200, function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            });
 
-            move_uploaded_file($newAvatar['tmp_name'], './media/avatars/'.$avatarName);
+            $img->save('./media/avatars/'.$avatarName);
 
             if($oldProfilePick != 'default.jpg') {
                 unlink("./media/avatars/".$oldProfilePick);
@@ -75,7 +86,7 @@ if($name) {
         } else {
             $_SESSION['flash'] = "Tipo de arquivo inválido, selecione uma foto.";
             header("Location: ".$base."/settings.php");
-            exit;
+            exit;   
         }
 
     }
@@ -89,9 +100,24 @@ if($name) {
             
             $oldCover = $userInfo->cover;
 
-            $coverName = md5(time().rand(0,9999)).'.jpg';
+            $coverName = md5(uniqid(rand(0, 9999))).'.jpg';
+            
+            $img = $manager->make($newCover['tmp_name']);
+            if($img->height() > $img->width() || $img->height() === $img->width()) {
+                $img->resize(850, 310, function($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                });
+                $img->resize(450, 210, function($constraint) {
+                });
+            }else {
+                $img->resize(850, 310, function($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                });
+            }
 
-            move_uploaded_file($newCover['tmp_name'], './media/covers/'.$coverName);
+            $img->save('./media/covers/'.$coverName);
 
             if($oldCover != 'cover.jpg') {
                 unlink("./media/covers/".$oldCover);

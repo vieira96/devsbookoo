@@ -1,0 +1,12 @@
+{
+    "config": {
+        "vendor-dir": "vendor"
+    },"autoload": {
+        "psr-4": {
+            "Source\\":"source/"
+        }
+    },
+    "require": {
+        "intervention/image": "^2.5"
+    }
+}

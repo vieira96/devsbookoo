@@ -56,12 +56,23 @@
                 <img src="<?=$base?>/assets/images/more.png" />
             </div>
         </div>
-        <div class="feed-item-body mt-10 m-width-20">
-            <?=nl2br($feed_item->body);?>
-        </div>
+        <?php
+            switch($feed_item->type){
+                case 'text':
+                    echo "<div class='feed-item-body mt-10 m-width-20'>";
+                    echo nl2br($feed_item->body);
+                    echo "</div>";
+                    break;
+                case 'photo':
+                    echo "<div class='feed-item-body mt-10 m-width-20' style='display: flex; justify-content: center;'>";
+                    echo "<img src='".$base."/media/uploads/".$feed_item->body."'/>";
+                    echo "</div>";
+                    break;
+            }
+        ?>
         <div class="feed-item-buttons row mt-20 m-width-20">
             <div class="like-btn <?= $postLikeDao->isLiked($feed_item->id, $userInfo->id) ?'on':''?>"><?=$feed_item->likeCount?></div>
-            <div class="msg-btn" ><?=count($feed_item->comments)?></div>
+            <div class="msg-btn" data-id="<?=$feed_item->id;?>" ><?=count($feed_item->comments)?></div>
         </div>
 
         <div class="feed-item-comments">
