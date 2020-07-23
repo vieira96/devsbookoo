@@ -50,7 +50,7 @@ class PostDaoMysql implements PostDAO {
         return $array;
     }
 
-    public function getUserFeed($id_user)
+    public function getUserFeed($id_user, $user_online)
     {
         $array = [];
 
@@ -61,7 +61,7 @@ class PostDaoMysql implements PostDAO {
         if($sql->rowCount() > 0) {
             $data = $sql->fetchAll(PDO::FETCH_ASSOC);
             
-            $array = $this->_postListToObject($data, $id_user);   
+            $array = $this->_postListToObject($data, $user_online);   
         }
         
         return $array;

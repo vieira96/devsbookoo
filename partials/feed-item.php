@@ -1,4 +1,4 @@
-<?php require_once 'partials/feed-item-script.php'; ?>
+    <?php require_once 'partials/feed-item-script.php'; ?>
 
 <div class="box feed-item" data-id="<?=$feed_item->id?>">
     <div class="box-body">
@@ -52,9 +52,11 @@
                     ?>
                 </span>
             </div>
-            <div class="feed-item-head-btn">
-                <img src="<?=$base?>/assets/images/more.png" />
-            </div>
+            <?php if($feed_item->mine): ?>
+                <div class="feed-item-head-btn">
+                    <img src="<?=$base?>/assets/images/more.png" />
+                </div>
+            <?php endif; ?>
         </div>
         <?php
             switch($feed_item->type){

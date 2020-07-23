@@ -42,7 +42,7 @@ $user->ageYears = $dateFrom->diff($dateTo)->y; // pega a diferença entre os ano
 
 //pegar feed do usuario
 
-$feed = $postDao->getUserFeed($id);
+$feed = $postDao->getUserFeed($id, $userInfo->id);
 
 //verificar se sigo esse usuario
 $isFollowing = $urDao->isFollowing($userInfo->id, $id);
@@ -162,9 +162,9 @@ require 'partials/menu.php';
                     <?php foreach($user->photos as $key => $photo): ?>
                         <?php if($key < 4): ?>
                         <div class="user-photo-item">
-                            <a href="#modal-<?=$key;?>" data-modal-open>
+                            <div href="#modal-<?=$key;?>" data-modal-open>
                                 <img src="<?= $base; ?>/media/uploads/<?=$photo->body;?>" />
-                            </a>
+                            </div>
                             <div id="modal-<?=$key;?>" style="display:none">
                                 <img src="<?= $base ?>/media/uploads/<?=$photo->body;?>" />
                             </div>
@@ -197,9 +197,9 @@ require 'partials/menu.php';
 </div>
 
 </section>
-<script>
+<!-- <script>
     window.onload = function() {
         var modal = new VanillaModal.default();
     };
-</script>
+</script> -->
 <?php require 'partials/footer.php';?>
