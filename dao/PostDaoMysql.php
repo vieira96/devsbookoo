@@ -27,12 +27,33 @@ class PostDaoMysql implements PostDAO {
         return true;
     }
 
+    public function findPostById($id)
+    {
+
+        $sql = $this->pdo->prepare("SELECT * FROM posts WHERE id = :id");
+        $sql->bindValue(":id", $id);
+        $sql->execute();
+        if($sql->rowCount() > 0) {
+            $data = $sql->fetch(PDO::FETCH_ASSOC);
+            $post = $this->generatePost($data);
+
+            return $post;
+        }
+
+    }
+
     public function delete($id_post, $id_user) 
     {
         $sql = $this->pdo->prepare("DELETE FROM posts WHERE id = :id_post AND id_user = :id_user");
         $sql->bindValue(":id_post", $id_post);
         $sql->bindValue(":id_user", $id_user);
         $sql->execute();
+
+        if($sql->rowCount() > 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public function getHomeFeed($id_user)
@@ -103,6 +124,7 @@ class PostDaoMysql implements PostDAO {
         foreach($post_list as $post_item) {
             $newPost = new Post();
             $newPost->id = $post_item['id'];
+            $newPost->id_user = $post_item['id_user'];
             $newPost->type = $post_item['type'];
             $newPost->created_at = $post_item['created_at'];
             $newPost->body = $post_item['body'];
@@ -129,4 +151,15 @@ class PostDaoMysql implements PostDAO {
         return $posts;
     }
 
+
+    private function generatePost($data)
+    {
+        $post = new Post();
+        $post->id = $data['id'];
+        $post->id_user = $data['id_user'];
+        $post->type = $data['type'];
+        $post->body = $data['body'];
+        $post->created_at = $data['created_at'];
+        return $post;
+    }
 }

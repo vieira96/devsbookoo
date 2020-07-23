@@ -11,7 +11,12 @@ $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
 
 if($id) {
     $postDao =  new PostDaoMysql($pdo);
-    $postDao->delete($id, $userInfo->id);
+    $post = $postDao->findPostById($id);
+    if($postDao->delete($id, $userInfo->id)) {
+        if($post->type == 'photo') {
+            unlink('./media/uploads/'.$post->body);
+        }
+    }
 }
 
 header("Location: " . $base);
