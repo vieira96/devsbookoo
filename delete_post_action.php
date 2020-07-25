@@ -16,8 +16,8 @@ if($id) {
         if($post->type == 'photo') {
             unlink('./media/uploads/'.$post->body);
         }
+        sleep('1,8');
     }
 }
-
 header("Location: " . $base);
 exit;

@@ -19,8 +19,7 @@
             <div class="feed-new-send">
                 <img src="<?=$base;?>/assets/images/send.png" />
             </div>
-            <form class="feed-new-form" method="POST" action="<?=$base;?>/feed_editor_action.php">
-                <input type="hidden" name="body">
+            <form class="feed-new-form" method="POST" action="<?=$base;?>/feed_editor_action.php">                <input type="hidden" name="body">
             </form>
         </div>
     </div>

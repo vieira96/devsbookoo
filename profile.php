@@ -6,6 +6,7 @@ require_once 'dao/PostDaoMysql.php';
 require_once 'dao/UserDaoMysql.php';
 require_once 'dao/UserRelationDaoMysql.php';
 require_once 'dao/PostLikeDaoMysql.php';
+require_once 'dao/PostShareDaoMysql.php';
 
 $activeMenu = '';
 $auth = new Auth($pdo, $base);

@@ -36,6 +36,14 @@ window.onload = function() {
         });
     });
 
+    document.querySelectorAll('.share-btn').forEach(item=>{
+        item.addEventListener('click', ()=>{
+            let id = item.closest('.feed-item').getAttribute('data-id');
+            
+            window.location.href = 'share_action.php?id='+id;
+        });
+    });
+
     document.querySelectorAll('.fic-item-field').forEach(item=>{
         item.addEventListener('keyup', async (e)=>{
             if(e.keyCode == 13) {
@@ -74,4 +82,9 @@ window.onload = function() {
     });
     
 };
+
+function alerta() {
+    swal('Deletando Post...', {buttons: false, timer: 1800});
+}
+
 </script>

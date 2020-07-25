@@ -74,10 +74,13 @@
 .feed-item-buttons {
     border-top:1px solid #EEE;
     padding:10px 0;
+    display: flex;
+    align-items: center;
 }
 
 .like-btn,
-.msg-btn {
+.msg-btn,
+.share-btn {
     display: flex;
     align-items: center;
     cursor: pointer;
@@ -89,6 +92,12 @@
     margin-right:20px;
     font-size:15px;
 }
+
+.share-btn {
+    background-image: url('../images/share.png');
+    color:#5F7D95;
+}
+
 .like-btn {
     background-image: url('../images/heart-off.png');
     color:#5F7D95;

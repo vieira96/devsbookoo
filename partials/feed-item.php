@@ -1,4 +1,4 @@
-    <?php require_once 'partials/feed-item-script.php'; ?>
+<?php require_once 'partials/feed-item-script.php'; ?>
 
 <div class="box feed-item" data-id="<?=$feed_item->id?>">
     <div class="box-body">
@@ -16,6 +16,12 @@
                                 break;
                             case 'photo':
                                 echo "Postou uma foto";
+                                break;
+                            case 'sharedPost':
+                                echo "Compartilhou um post";
+                                break;
+                            case 'sharedPhoto':
+                                echo "Compartilhou uma foto";
                                 break;
                         }
                     ?>
@@ -56,7 +62,7 @@
                 <div class="feed-item-head-btn">
                     <img src="<?=$base?>/assets/images/more.png" />
                     <div class="feed-item-more-window">
-                        <a href="<?=$base;?>/delete_post_action.php?id=<?=$feed_item->id;?>">Excluir Post</a>
+                        <a onclick="alerta()" href="<?=$base;?>/delete_post_action.php?id=<?=$feed_item->id;?>">Excluir Post</a>
                     </div>
                 </div>
             <?php endif; ?>
@@ -64,11 +70,13 @@
         <?php
             switch($feed_item->type){
                 case 'text':
+                case 'sharedPost':
                     echo "<div class='feed-item-body mt-10 m-width-20'>";
                     echo nl2br($feed_item->body);
                     echo "</div>";
                     break;
                 case 'photo':
+                case 'sharedPhoto':
                     echo "<div class='feed-item-body mt-10 m-width-20' style='display: flex; justify-content: center;'>";
                     echo "<img src='".$base."/media/uploads/".$feed_item->body."'/>";
                     echo "</div>";
@@ -77,7 +85,8 @@
         ?>
         <div class="feed-item-buttons row mt-20 m-width-20">
             <div class="like-btn <?= $postLikeDao->isLiked($feed_item->id, $userInfo->id) ?'on':''?>"><?=$feed_item->likeCount?></div>
-            <div class="msg-btn" data-id="<?=$feed_item->id;?>" ><?=count($feed_item->comments)?></div>
+            <div class="msg-btn"><?=count($feed_item->comments)?></div>
+            <div class="share-btn"></div>
         </div>
 
         <div class="feed-item-comments">

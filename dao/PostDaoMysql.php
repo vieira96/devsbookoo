@@ -143,8 +143,7 @@ class PostDaoMysql implements PostDAO {
 
             // COMMENTS
             $newPost->comments = $postCommentDao->getComments($newPost->id);
-        
-
+            
             $posts[] = $newPost;
         }
 

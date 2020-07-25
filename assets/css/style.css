@@ -196,6 +196,19 @@ header .head-side {
 .feed .row {
     display:flex;
 }
+
+.swal-modal {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    margin-left: 10px;
+    height: 60px;
+    width: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .feed .column {
     display:flex;
     flex-direction: column;

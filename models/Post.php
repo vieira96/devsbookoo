@@ -1,7 +1,5 @@
 <?php
 
-require_once 'dao/PostDaoMysql.php';
-
 class Post {
 
     public $id;
