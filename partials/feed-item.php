@@ -86,7 +86,7 @@
         <div class="feed-item-buttons row mt-20 m-width-20">
             <div class="like-btn <?= $postLikeDao->isLiked($feed_item->id, $userInfo->id) ?'on':''?>"><?=$feed_item->likeCount?></div>
             <div class="msg-btn"><?=count($feed_item->comments)?></div>
-            <div class="share-btn"></div>
+            <div class="share-btn"><?=$feed_item->shareCount;?><?=$feed_item->shareCount > 1 ? ' compartilhamentos' : ' compartilhamento'?></div>
         </div>
 
         <div class="feed-item-comments">
